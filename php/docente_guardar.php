@@ -5,7 +5,7 @@
     $nombre      = limpiar_cadena($_POST['nombre']);
     $apellido    = limpiar_cadena($_POST['apellido']);
     $telefono    = limpiar_cadena($_POST['telefono']);
-    $email       = limpiar_cadena($_POST['email']);
+    $email       = limpiar_cadena($_POST['correo']);
 
     // Verificando campos obligatorios
     if ($nombre == "" || $apellido == "" || $telefono == "" || $email == "") {
@@ -61,7 +61,7 @@
     } else {
         $check_email = conexion();
         // Verifica email único por docente
-        $check_email = $check_email->query("SELECT email FROM docente WHERE email='$email'");
+        $check_email = $check_email->query("SELECT correo FROM docente WHERE correo='$email'");
         if ($check_email->rowCount() > 0) {
             echo '
                 <div class="notification is-danger is-light">
@@ -76,13 +76,13 @@
 
     // Guardando datos (por default docente está activo)
     $guardar_docente = conexion();
-    $guardar_docente = $guardar_docente->prepare("INSERT INTO docente(nombre, apellido, telefono, email, estado) VALUES(:nombre, :apellido, :telefono, :email, 'ACTIVO')");
+    $guardar_docente = $guardar_docente->prepare("INSERT INTO docente(nombre, apellido, telefono, correo, estado) VALUES(:nombre, :apellido, :telefono, :correo, 'ACTIVO')");
 
     $marcadores = [
         ":nombre"   => $nombre,
         ":apellido" => $apellido,
         ":telefono" => $telefono,
-        ":email"    => $email
+        ":correo"    => $email
     ];
 
     $guardar_docente->execute($marcadores);

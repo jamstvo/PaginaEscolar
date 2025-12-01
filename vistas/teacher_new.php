@@ -39,7 +39,7 @@
             <div class="column">
                 <div class="control">
                     <label>Email</label>
-                    <input class="input" type="email" name="email" maxlength="70" required>
+                    <input class="input" type="email" name="correo" maxlength="70" required>
                 </div>
             </div>
         </div>

@@ -5,8 +5,8 @@
 
     // Buscar en la tabla DOCENTE (no usuario)
     if (isset($busqueda) && $busqueda != "") {
-        $consulta_datos = "SELECT * FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR email LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%') ORDER BY nombre ASC LIMIT $inicio, $registros";
-        $consulta_total = "SELECT COUNT(id) FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR email LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%')";
+        $consulta_datos = "SELECT * FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%') ORDER BY nombre ASC LIMIT $inicio, $registros";
+        $consulta_total = "SELECT COUNT(id) FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%')";
     } else {
         $consulta_datos = "SELECT * FROM docente ORDER BY nombre ASC LIMIT $inicio, $registros";
         $consulta_total = "SELECT COUNT(id) FROM docente";
@@ -47,7 +47,7 @@
                     <td>' . $contador . '</td>
                     <td>' . $rows['nombre'] . '</td>
                     <td>' . $rows['apellido'] . '</td>
-                    <td>' . $rows['email'] . '</td>
+                    <td>' . $rows['correo'] . '</td>
                     <td>' . $rows['telefono'] . '</td>
                     <td>' . $rows['estado'] . '</td>
                     <td>
