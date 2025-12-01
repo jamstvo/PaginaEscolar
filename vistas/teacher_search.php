@@ -1,6 +1,6 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Usuarios</h1>
-    <h2 class="subtitle">Buscar usuario</h2>
+    <h1 class="title">Docentes</h1>
+    <h2 class="subtitle">Buscar docente</h2>
 </div>
 
 <div class="container pb-6 pt-6">
@@ -11,12 +11,12 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario'])){
+        if(!isset($_SESSION['busqueda_docente']) && empty($_SESSION['busqueda_docente'])){
     ?>
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario">   
+                <input type="hidden" name="modulo_buscador" value="docente">   
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" p
@@ -34,9 +34,9 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario"> 
-                <input type="hidden" name="eliminar_buscador" value="usuario">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”
+                <input type="hidden" name="modulo_buscador" value="docente"> 
+                <input type="hidden" name="eliminar_buscador" value="docente">
+                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_docente']; ?>”
                 </strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
@@ -45,9 +45,9 @@
     </div>
     <?php 
 
-            // Eliminar usuario
-            if(isset($_GET['user_id_del'])){
-                require_once "./php/usuario_eliminar.php";
+            // Eliminar docente
+            if(isset($_GET['teacher_id_del'])){
+                require_once "./php/docente_eliminar.php";
             }
             
             if(!isset($_GET['page'])){
@@ -62,9 +62,9 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=user_search&page=";
             $registros=3;
-            $busqueda=$_SESSION['busqueda_usuario'];
+            $busqueda=$_SESSION['busqueda_docente'];
 
-            require_once "./php/usuario_lista.php";
+            require_once "./php/docente_lista.php";
         }
     ?>
 </div>
