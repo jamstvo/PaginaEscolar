@@ -41,7 +41,7 @@
     if($check_user->rowCount() == 1){
         $check_user = $check_user->fetch();
 
-        if($check_user['nombre'] == $usuario && password_verify($clave, $check_user['password'])){
+        if($check_user['nombre'] == $usuario && password_verify($clave, $check_user['contraseña'])){
             $_SESSION['id'] = $check_user['id'];
             $_SESSION['nombre'] = $check_user['nombre'];
             $_SESSION['rol'] = $check_user['rol'];
