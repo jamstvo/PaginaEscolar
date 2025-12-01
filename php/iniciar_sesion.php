@@ -41,12 +41,10 @@
     if($check_user->rowCount() == 1){
         $check_user = $check_user->fetch();
 
-        if($check_user['usuario'] == $usuario && password_verify($clave, $check_user['password'])){
+        if($check_user['nombre'] == $usuario && password_verify($clave, $check_user['password'])){
             $_SESSION['id'] = $check_user['id'];
-            $_SESSION['usuario'] = $check_user['usuario'];
             $_SESSION['nombre'] = $check_user['nombre'];
-            $_SESSION['apellido'] = $check_user['apellido'];
-            $_SESSION['rol'] = $check_user['rol']; // <--- AGREGADO
+            $_SESSION['rol'] = $check_user['rol'];
 
             // Redireccion según el rol
             if($check_user['rol'] == "admin"){
