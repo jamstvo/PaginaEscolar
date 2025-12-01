@@ -37,7 +37,7 @@
 
     // Verificando usuario en la base de datos
     $check_user = conexion();
-    $check_user = $check_user->query("SELECT * FROM usuario WHERE usuario='$usuario'");
+    $check_user = $check_user->query("SELECT * FROM usuario WHERE nombre='$usuario'");
     if($check_user->rowCount() == 1){
         $check_user = $check_user->fetch();
 
