@@ -50,9 +50,9 @@
             if($check_user['rol'] == "admin"){
                 // Panel Administrador
                 if(headers_sent()){
-                    echo "<script> window.location.href='index.php?vista=admin_dashboard'; </script>";
+                    echo "<script> window.location.href='index.php?vista=home'; </script>";
                 }else{
-                    header("Location: index.php?vista=admin_dashboard");
+                    header("Location: index.php?vista=home");
                 }
             }elseif($check_user['rol'] == "docente"){
                 // Panel Docente
