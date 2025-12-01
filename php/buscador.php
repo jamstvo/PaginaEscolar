@@ -6,7 +6,7 @@
     if(in_array($modulo_buscador, $modulos)){
 
         $modulos_url=[
-            "docente"=>"teacher_search"
+            "docente"=>"teacher_search",
             "grupo"   => "group_search",
             "horario" => "schedule_search"
         ];

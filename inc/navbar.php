@@ -47,7 +47,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id']; ?>" 
+          <a href="index.php?vista=teacher_update&user_id_up=<?php echo $_SESSION['id']; ?>" 
           class="button is-primary is-rounded">
             Mi cuenta
           </a>
