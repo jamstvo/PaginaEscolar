@@ -46,29 +46,14 @@
             $_SESSION['nombre'] = $check_user['nombre'];
             $_SESSION['rol'] = $check_user['rol'];
 
-            // Redireccion según el rol
-            if($check_user['rol'] == "admin"){
-                // Panel Administrador
+           
                 if(headers_sent()){
                     echo "<script> window.location.href='index.php?vista=home'; </script>";
                 }else{
                     header("Location: index.php?vista=home");
                 }
-            }elseif($check_user['rol'] == "docente"){
-                // Panel Docente
-                if(headers_sent()){
-                    echo "<script> window.location.href='index.php?vista=teacher_dashboard'; </script>";
-                }else{
-                    header("Location: index.php?vista=teacher_dashboard");
-                }
-            }else{
-                // Panel Usuario Genérico
-                if(headers_sent()){
-                    echo "<script> window.location.href='index.php?vista=usuario_consultas'; </script>";
-                }else{
-                    header("Location: index.php?vista=usuario_consultas");
-                }
-            }
+           
+            
         }else{
             echo '
                 <div class="notification is-danger is-light">
