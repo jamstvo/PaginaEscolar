@@ -59,13 +59,13 @@
 
     // Verificando admin
     $check_admin=conexion();
-    $check_admin=$check_admin->query("SELECT usuario,password FROM usuario WHERE 
-    usuario='$admin_usuario' AND id='".$_SESSION['id']."'");
+    $check_admin=$check_admin->query("SELECT nombre,contraseña FROM usuario WHERE 
+    nombre='$admin_usuario' AND id='".$_SESSION['id']."'");
     if($check_admin->rowCount()==1){
         $check_admin=$check_admin->fetch();
 
-        if($check_admin['usuario']!=$admin_usuario || !password_verify($admin_clave, $check_admin
-        ['password'])){
+        if($check_admin['nombre']!=$admin_usuario || !password_verify($admin_clave, $check_admin
+        ['contraseña'])){
             echo '
                 <div class="notification is-danger is-light">
                     <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -136,7 +136,7 @@
     }
 
     // Verificando el email
-    if($email!="" && $email!=$datos['email']){
+    if($email!="" && $email!=$datos['correo']){
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             echo '
                 <div class="notification is-danger is-light">
@@ -147,7 +147,7 @@
             exit();
         }else{
             $check_email=conexion();
-            $check_email=$check_email->query("SELECT email FROM docente WHERE email='$email'");
+            $check_email=$check_email->query("SELECT correo FROM docente WHERE correo='$email'");
             if($check_email->rowCount()>0){
                 echo'
                     <div class="notification is-danger is-light">
@@ -164,7 +164,7 @@
     // Actualizar datos
     $actualizar_docente=conexion();
     $actualizar_docente=$actualizar_docente->prepare("UPDATE docente SET 
-    nombre=:nombre,apellido=:apellido,email=:email,telefono=:telefono WHERE
+    nombre=:nombre,apellido=:apellido,correo=:correo,telefono=:telefono WHERE
     id=:id");
 
     $marcadores=[
@@ -172,7 +172,7 @@
         ":nombre"=>$nombre,
         ":apellido"=>$apellido,
         ":telefono"=>$telefono,
-        ":email"=>$email
+        ":correo"=>$email
     ];
 
     if($actualizar_docente->execute($marcadores)){

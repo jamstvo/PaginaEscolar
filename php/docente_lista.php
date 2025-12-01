@@ -3,13 +3,13 @@
     $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
     $tabla = "";
 
-    // Buscar en la tabla DOCENTE (no usuario)
+    // Buscar en la tabla DOCENTE (no usuario) - Solo ACTIVOS
     if (isset($busqueda) && $busqueda != "") {
-        $consulta_datos = "SELECT * FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%') ORDER BY nombre ASC LIMIT $inicio, $registros";
-        $consulta_total = "SELECT COUNT(id) FROM docente WHERE (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%')";
+        $consulta_datos = "SELECT * FROM docente WHERE estado='ACTIVO' AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%') ORDER BY nombre ASC LIMIT $inicio, $registros";
+        $consulta_total = "SELECT COUNT(id) FROM docente WHERE estado='ACTIVO' AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%')";
     } else {
-        $consulta_datos = "SELECT * FROM docente ORDER BY nombre ASC LIMIT $inicio, $registros";
-        $consulta_total = "SELECT COUNT(id) FROM docente";
+        $consulta_datos = "SELECT * FROM docente WHERE estado='ACTIVO' ORDER BY nombre ASC LIMIT $inicio, $registros";
+        $consulta_total = "SELECT COUNT(id) FROM docente WHERE estado='ACTIVO'";
     }
 
     $conexion = conexion();
@@ -55,7 +55,7 @@
                         class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="' . $url . $pagina . '&docente_id_del=' . $rows['id'] . '" 
+                        <a href="' . $url . $pagina . '&teacher_id_del=' . $rows['id'] . '" 
                         class="button is-danger is-rounded is-small">Inactivar</a>
                     </td>
                 </tr>

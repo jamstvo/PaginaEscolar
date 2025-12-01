@@ -1,5 +1,5 @@
 <?php
-    $docente_id_del=limpiar_cadena($_GET['docente_id_del']);
+    $docente_id_del=limpiar_cadena($_GET['teacher_id_del']);
 
     // Verificando docente
     $check_docente=conexion();
