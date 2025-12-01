@@ -25,7 +25,12 @@ function enviar_formulario_ajax(e){
         .then(respuesta => respuesta.text())
         .then(respuesta => {
             let contenedor=document.querySelector(".form-rest");
-            contenedor.innerHTML = respuesta;
+            if(contenedor){
+                contenedor.innerHTML = respuesta;
+            }else{
+                console.log('Respuesta del servidor:', respuesta);
+                alert('Respuesta del servidor: ' + respuesta);
+            }
         });
     }
 }

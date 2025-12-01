@@ -1,6 +1,6 @@
 <div class="main-container">
 
-    <form class="box login" action="" method="POST" autocomplete="off">
+    <form class="box login FormularioAjax" action="./php/iniciar_sesion.php" method="POST" autocomplete="off">
         <h5 class="title is-5 has-text-centered is-uppercase">Sistema de Agenda</h5>
 
         <div class="field">
@@ -23,12 +23,6 @@
             <button type="submit" class="button is-info is-rounded">Iniciar Sesión</button>
         </p>
 
-        <?php
-        if(isset($_POST['login_usuario']) && isset($_POST['login_clave'])){
-            require_once "./php/main.php";
-            require_once "./php/iniciar_sesion.php";
-            
-        }
-        ?>
+        <div class="form-rest"></div>
     </form>
 </div>
