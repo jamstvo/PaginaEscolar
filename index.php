@@ -15,8 +15,8 @@
     $_GET['vista']!="login" && $_GET['vista']!="404"){
 
         // Cerrar sesion
-        if((!isset($_SESSION['id']) || $_SESSION['id']=="") || (!isset($_SESSION['usuario']) ||
-        $_SESSION['usuario']=="")){
+        if((!isset($_SESSION['id']) || $_SESSION['id']=="") || (!isset($_SESSION['nombre']) ||
+        $_SESSION['nombre']=="")){
             include "./vistas/logout.php";
             exit();
         }
