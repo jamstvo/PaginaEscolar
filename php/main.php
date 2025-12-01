@@ -1,7 +1,7 @@
 <?php
     // Conexión a la base de datos
     function conexion(){
-    $pdo = new PDO('mysql:host=*;dbname=*', '*', '*');
+    $pdo = new PDO('mysql:host=localhost;dbname=docentes', 'cetis81', 'Liebres81');
     return $pdo;
     }
 
