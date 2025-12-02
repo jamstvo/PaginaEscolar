@@ -21,6 +21,7 @@
             <a class="navbar-item" href="index.php?vista=teacher_new">Nuevo</a>
             <a class="navbar-item" href="index.php?vista=teacher_list">Lista</a>
             <a class="navbar-item" href="index.php?vista=teacher_search">Buscar</a>
+            <a class="navbar-item" href="index.php?vista=teacher_listN">Inactivos</a>
         </div>
       </div>
 
