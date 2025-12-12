@@ -7,10 +7,9 @@
             <label class="label">Correo</label>
             <div class="control">
                 <input class="input" type="email" name="login_correo" 
-                maxlength="50" required>
+                maxlength="255" required>
             </div>
         </div>
-
 
         <div class="field">
             <label class="label">Contraseña</label>

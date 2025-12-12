@@ -3,13 +3,62 @@
     $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
     $tabla = "";
 
-    // Buscar en la tabla DOCENTE (no usuario) - Solo ACTIVOS
+    $status_filter = isset($_GET['status_filter']) ? limpiar_cadena($_GET['status_filter']) : "ACTIVO";
+
+    $condicion_status = "";
+    if($status_filter == "ACTIVO"){
+        $condicion_status = "AND status='ACTIVO'";
+    }elseif($status_filter == "INACTIVO"){
+        $condicion_status = "AND status='INACTIVO'";
+    }else{
+        $condicion_status = ""; // TODOS
+    }
+
+
     if (isset($busqueda) && $busqueda != "") {
-        $consulta_datos = "SELECT * FROM docente WHERE estado='ACTIVO' AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%') ORDER BY nombre ASC LIMIT $inicio, $registros";
-        $consulta_total = "SELECT COUNT(id) FROM docente WHERE estado='ACTIVO' AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%' OR telefono LIKE '%$busqueda%')";
+        $consulta_datos = "
+        SELECT docentes.*, usuarios.correo 
+        FROM docentes
+        INNER JOIN usuarios ON docentes.usuario_id = usuario.id
+        WHERE docentes.id!='".$_SESSION['id']."' 
+        AND (docentes.nombre LIKE '%$busqueda%' 
+        OR docentes.apellido LIKE '%$busqueda%' 
+        OR docentes.telefono LIKE '%$busqueda%'
+        OR docentes.especialidad LIKE '%$busqueda%'
+        OR usuarios.correo LIKE '%$busqueda%')
+        $condicion_status
+        ORDER BY docentes.nombre ASC
+        LIMIT $inicio, $registros";
+
+        $consulta_total = "
+        SELECT COUNT(docente.id) 
+        FROM docentes
+        INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
+        WHERE docentes.id!='".$_SESSION['id']."'
+        AND (docentes.nombre LIKE '%$busqueda%'
+        OR docentes.apellido LIKE '%$busqueda%'
+        OR docentes.telefono LIKE '%$busqueda%'
+        OR docentes.especialidad LIKE '%$busqueda%'
+        OR usuarios.correo LIKE '%$busqueda%')
+        $condicion_status";
+
     } else {
-        $consulta_datos = "SELECT * FROM docente WHERE estado='ACTIVO' ORDER BY nombre ASC LIMIT $inicio, $registros";
-        $consulta_total = "SELECT COUNT(id) FROM docente WHERE estado='ACTIVO'";
+        $consulta_datos = "
+        SELECT docentes.*, usuarios.correo 
+        FROM docentes
+        INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
+        WHERE docentes.id!='".$_SESSION['id']."'
+        $condicion_status
+        ORDER BY docentes.nombre ASC
+        LIMIT $inicio, $registros";
+
+        $consulta_total = "
+        SELECT COUNT(docentes.id)
+        FROM docentes
+        INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
+        WHERE docentes.id!='".$_SESSION['id']."'
+        $condicion_status";
+
     }
 
     $conexion = conexion();
@@ -28,11 +77,12 @@
                 <thead>
                     <tr class="has-text-centered">
                         <th>#</th>
+                        <th>Usuario</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
-                        <th>Email</th>
                         <th>Telefono</th>
-                        <th>Estado</th>
+                        <th>Especialidad</th>
+                        <th>Status</th>
                         <th colspan="2">Opciones</th>
                     </tr>
                 </thead>
@@ -45,18 +95,21 @@
             $tabla .= '
                 <tr class="has-text-centered">
                     <td>' . $contador . '</td>
+                    <td>' . $rows['correo'] . '</td>
                     <td>' . $rows['nombre'] . '</td>
                     <td>' . $rows['apellido'] . '</td>
-                    <td>' . $rows['correo'] . '</td>
                     <td>' . $rows['telefono'] . '</td>
-                    <td>' . $rows['estado'] . '</td>
+                    <td>' . $rows['especialidad'] . '</td>
+                    <td>' . $rows['status'] . '</td>
                     <td>
                         <a href="index.php?vista=teacher_update&teacher_id_up=' . $rows['id'] . '" 
                         class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="' . $url . $pagina . '&teacher_id_del=' . $rows['id'] . '" 
-                        class="button is-danger is-rounded is-small">Inactivar</a>
+                        <a href="./php/docente_status.php?id='.$rows['id'].'" 
+                        class="button '.($rows['status']=="ACTIVO" ? "is-danger" : "is-warning").' is-rounded is-small">
+                        '.($rows['status']=="ACTIVO" ? "Desactivar" : "Activar").'
+                        </a>
                     </td>
                 </tr>
             ';

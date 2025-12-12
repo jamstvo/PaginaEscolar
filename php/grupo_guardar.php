@@ -49,7 +49,7 @@ if (!in_array($especialidad, $especialidades_permitidas, true)) {
 
 // Guardando datos (por default grupo está activo)
 $guardar_grupo = conexion();
-$guardar_grupo = $guardar_grupo->prepare("INSERT INTO grupo(semestre, especialidad) VALUES(:semestre, :especialidad)");
+$guardar_grupo = $guardar_grupo->prepare("INSERT INTO grupos(semestre, especialidad) VALUES(:semestre, :especialidad)");
 
 $marcadores = [
     ":semestre" => $semestre,

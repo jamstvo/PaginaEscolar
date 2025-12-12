@@ -1,7 +1,15 @@
 <?php
+
+    die("Estoy leyendo ESTE archivo main.php");
+
     // Conexión a la base de datos
     function conexion(){
-    $pdo = new PDO('mysql:host=localhost;dbname=gd', 'cetis81', 'Liebres81');
+   $pdo = new PDO(
+    'mysql:host=localhost;port=3306;dbname=gestionHorarios',
+    'dev',
+    '1234'
+);
+
     return $pdo;
     }
 

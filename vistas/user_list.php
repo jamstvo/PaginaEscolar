@@ -1,17 +1,12 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Docentes</h1>
-    <h2 class="subtitle">Lista de docentes</h2>
+    <h1 class="title">Usuarios</h1>
+    <h2 class="subtitle">Lista de usuarios</h2>
 </div>
 
 <div class="container pb-6 pt-6">
 
     <?php
         require_once "./php/main.php";
-        
-        // Desactivar docente
-        if(isset($_GET['teacher_id_des'])){
-            require_once "./php/docente_desactivar.php";
-        }
 
         if(!isset($_GET['page'])){
             $pagina=1;
@@ -23,7 +18,7 @@
         }
 
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=teacher_list&page=";
+        $url="index.php?vista=user_list&page=";
         $registros=3;
         $busqueda="";
 
@@ -48,6 +43,6 @@
 
         <?php
 
-        require_once "./php/docente_lista.php";
+        require_once "./php/usuario_lista.php";
     ?>
 </div>

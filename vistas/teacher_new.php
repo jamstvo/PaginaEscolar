@@ -12,6 +12,25 @@
       <div class="columns">
             <div class="column">
                 <div class="control">
+                    <label>Usuario</label>
+                    <div class="select is-fullwidth">
+                    <select name="usuario_id" required>
+                        <?php
+                        $conexion = conexion();
+                        $usuarios = $conexion->query("SELECT id, correo FROM usuario WHERE status='ACTIVO' ORDER BY correo ASC");
+                        $usuarios = $usuarios->fetchAll();
+
+                        foreach($usuarios as $u){
+                            echo '<option value="'.$u['id'].'">'.$u['correo'].'</option>';
+                        }
+                        ?>
+                    </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="control">
                     <label>Nombres</label>
                     <input class="input" type="text" name="nombre"
                     pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required>
@@ -38,8 +57,9 @@
 
             <div class="column">
                 <div class="control">
-                    <label>Email</label>
-                    <input class="input" type="email" name="correo" maxlength="70" required>
+                    <label>Especialidad</label>
+                    <input class="input" type="text" name="especialidad"
+                    pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required>
                 </div>
             </div>
         </div>

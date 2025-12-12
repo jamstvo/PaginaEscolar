@@ -43,12 +43,30 @@
         </div>
       </div>
 
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Materias</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="index.php?vista=subject_new">Nuevo</a>
+          <a class="navbar-item" href="index.php?vista=subject_list">Lista</a>
+          <a class="navbar-item" href="index.php?vista=subject_search">Buscar</a>
+        </div>
+      </div>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Usuarios</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-item" href="index.php?vista=user_new">Nuevo</a>
+            <a class="navbar-item" href="index.php?vista=user_list">Lista</a>
+            <a class="navbar-item" href="index.php?vista=user_search">Buscar</a>
+        </div>
     </div>
+
+  </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a href="index.php?vista=teacher_update&user_id_up=<?php echo $_SESSION['id']; ?>" 
+          <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id']; ?>" 
           class="button is-primary is-rounded">
             Mi cuenta
           </a>

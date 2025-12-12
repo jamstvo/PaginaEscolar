@@ -15,16 +15,6 @@
     }
     
     // Verificar integridad de los datos
-        if(verificar_datos("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,50}", $correo)){
-            echo '
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    El correo no coincide con el formato solicitado.
-                </div>
-            ';
-            exit();
-        }
-
         if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave)){
             echo '
                 <div class="notification is-danger is-light">
@@ -34,10 +24,20 @@
             ';
             exit();
         }
+    // Validar correo
+        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            echo '
+                <div class="notification is-danger is-light">
+                    <strong>¡Ocurrio un error inesperado!</strong><br>
+                    El correo electrónico no es válido.
+                </div>
+            ';
+            exit();
+        }
 
     // Verificando usuario en la base de datos
     $check_user = conexion();
-    $check_user = $check_user->query("SELECT * FROM usuario WHERE correo='$correo'");
+    $check_user = $check_user->query("SELECT * FROM usuarios WHERE correo='$correo' AND status='ACTIVO'");
     if($check_user->rowCount() == 1){
         $check_user = $check_user->fetch();
 

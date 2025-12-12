@@ -1,14 +1,15 @@
 <?php
     $modulo_buscador=limpiar_cadena($_POST['modulo_buscador']);
 
-    $modulos=["docente", "grupo", "horario"];
+    $modulos=["docente", "grupo", "horario", "usuario"];
 
     if(in_array($modulo_buscador, $modulos)){
 
         $modulos_url=[
-            "docente"=>"teacher_search",
+            "docente" => "teacher_search",
             "grupo"   => "group_search",
-            "horario" => "schedule_search"
+            "horario" => "schedule_search",
+            "usuario" => "user_search"
         ];
 
         $modulos_url=$modulos_url[$modulo_buscador];

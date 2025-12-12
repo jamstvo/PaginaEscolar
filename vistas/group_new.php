@@ -10,6 +10,15 @@
     <form class="FormularioAjax" action="./php/grupo_guardar.php" method="POST" autocomplete="off">
 
       <div class="columns">
+
+            <div class="column">
+                <div class="control">
+                    <label>Nombre</label>
+                    <input class="input" type="text" name="nombre"
+                    pattern="[a-zA-Z ]{2,5}" maxlength="5" required>
+                </div>
+            </div>
+            
             <div class="column">
                 <div class="control">
                     <label>Semestre</label>
