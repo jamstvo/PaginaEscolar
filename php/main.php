@@ -1,16 +1,13 @@
 <?php
-
-    die("Estoy leyendo ESTE archivo main.php");
-
-    // Conexión a la base de datos
+    // Conexion
     function conexion(){
-   $pdo = new PDO(
-    'mysql:host=localhost;port=3306;dbname=gestionHorarios',
-    'dev',
-    '1234'
-);
-
-    return $pdo;
+        $pdo = new PDO(
+            'mysql:host=localhost;port=3306;dbname=gestionHorarios',
+            'dev',
+            '1234',
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+        );
+        return $pdo;
     }
 
     //Verificar los datos

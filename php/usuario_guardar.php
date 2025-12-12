@@ -82,7 +82,7 @@
 
     // Guardando datos
     $guardar_usuario=conexion();
-    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuarios(correo, contraseña_hash, rol, status)
+    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuarios(correo, contrasena_hash, rol, status)
     VALUES(:correo, :contraseña, :rol, 'ACTIVO')
     ");
 

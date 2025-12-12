@@ -61,13 +61,13 @@
 
     // Verificando admin
     $check_admin=conexion();
-    $check_admin=$check_admin->query("SELECT correo,contraseña_hash FROM usuarios WHERE 
+    $check_admin=$check_admin->query("SELECT correo,contrasena_hash FROM usuarios WHERE 
     correo='$admin_correo' AND id='".$_SESSION['id']."'");
     if($check_admin->rowCount()==1){
         $check_admin=$check_admin->fetch();
 
         if($check_admin['correo']!=$admin_correo || !password_verify($admin_clave, $check_admin
-        ['contraseña_hash'])){
+        ['contrasena_hash'])){
             echo '
                 <div class="notification is-danger is-light">
                     <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -170,7 +170,7 @@
     // Actualizar datos
     $actualizar_usuario=conexion();
     $actualizar_usuario=$actualizar_usuario->prepare("UPDATE usuarios SET correo=:correo,
-    contraseña_hash=:contraseña,rol=:rol  WHERE
+    contrasena_hash=:contraseña,rol=:rol  WHERE
     id=:id");
 
     $marcadores=[
