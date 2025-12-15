@@ -21,6 +21,7 @@
         $url="index.php?vista=user_list&page=";
         $registros=3;
         $busqueda="";
+        $status_filter = isset($_GET['status_filter']) ? $_GET['status_filter'] : 'ACTIVO';
 
         ?>
         <form method="GET" class="mb-4">
@@ -32,9 +33,9 @@
             <div class="control">
                 <div class="select">
                     <select name="status_filter" onchange="this.form.submit()">
-                        <option value="ACTIVO" <?php if($_GET['status_filter'] == 'ACTIVO') echo 'selected'; ?>>Activos</option>
-                        <option value="INACTIVO" <?php if($_GET['status_filter'] == 'INACTIVO') echo 'selected'; ?>>Inactivos</option>
-                        <option value="TODOS" <?php if($_GET['status_filter'] == 'TODOS') echo 'selected'; ?>>Todos</option>
+                        <option value="ACTIVO" <?php if($status_filter == 'ACTIVO') echo 'selected'; ?>>Activos</option>
+                        <option value="INACTIVO" <?php if($status_filter == 'INACTIVO') echo 'selected'; ?>>Inactivos</option>
+                        <option value="TODOS" <?php if($status_filter == 'TODOS') echo 'selected'; ?>>Todos</option>
                     </select>
                 </div>
             </div>

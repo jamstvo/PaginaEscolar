@@ -5,25 +5,25 @@
 
     $id=limpiar_cadena($_POST['id']);
 
-    // Verificar el usuario
-    $check_usuario=conexion();
-    $check_usuario = conexion()->prepare(
-    "SELECT * FROM usuarios WHERE id=:id");
-    $check_usuario->execute([":id"=>$id]);
+    // Verificar la materia
+    $check_materia=conexion();
+    $check_materia = conexion()->prepare(
+    "SELECT * FROM materias WHERE id=:id");
+    $check_materia->execute([":id"=>$id]);
 
 
-    if($check_usuario->rowCount()<=0){
+    if($check_materia->rowCount()<=0){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El usuario no existe en el sistema.
+                la materia no existe en el sistema.
             </div>
         ';
         exit();
     }else{
-        $datos=$check_usuario->fetch();
+        $datos=$check_materia->fetch();
     }
-    $check_usuario=null;
+    $check_materia=null;
 
     $admin_correo=limpiar_cadena($_POST['administrador_correo']);
     $admin_clave=limpiar_cadena($_POST['administrador_clave']);
@@ -92,13 +92,11 @@
     $check_admin=null;
 
     // Almacenando datos
-    $correo=limpiar_cadena($_POST['correo']);
-    $rol=limpiar_cadena($_POST['rol']);
-    $clave_1=limpiar_cadena($_POST['clave_1']);
-    $clave_2=limpiar_cadena($_POST['clave_2']);
+    $nombre=limpiar_cadena($_POST['nombre']);
+    $tipo=limpiar_cadena($_POST['tipo']);
 
     // Verificando campos obligatorios
-    if($correo=="" || $rol==""){
+    if($nombre=="" || $tipo==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -108,99 +106,56 @@
         exit();
     }
 
-    // Validar que los valores de rol estén entre las opciones permitidas
-        $roles = ["admin","docente"];
+    // // Validar que los valores del tipo estén entre las opciones permitidas
+        $tipos = ["ESPECIALIDAD","TRONCOCOMUN"];
 
-        if (!in_array($rol, $roles, true)) {
+        if (!in_array($tipo, $tipos, true)) {
             echo '
                 <div class="notification is-danger is-light">
                     <strong>¡Ocurrio un error inesperado!</strong><br>
-                    Rol no válido.
+                    Tipo no válido.
                 </div>
             ';
             exit();
         }
 
-    // Verificando el correo
-    if(!filter_var($correo,FILTER_VALIDATE_EMAIL)){
+    // Verificando integridad de los datos
+    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}",$nombre)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El correo electrónico no es válido.
+                El nombre no coincide con el formato solicitado.
             </div>
         ';
         exit();
-    }else{
-        $check_email=conexion();
-        $check_email=$check_email->query("SELECT correo FROM usuarios 
-        WHERE correo='$correo' AND id!='$id'");
-        if($check_email->rowCount()>0){
-            echo'
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    El correo ingresado ya se encuentra registrado, por favor elija otro.
-                </div>
-            ';
-            exit();
-        }
-        $check_email=null;
     }
 
-    // Verificando claves
-        $clave = $datos['contrasena_hash'];
-
-        if($clave_1 !== "" || $clave_2 !== ""){
-        // Verificando integridad de los datos
-            if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || 
-            verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
-                echo '
-                    <div class="notification is-danger is-light">
-                        <strong>¡Ocurrio un error inesperado!</strong><br>
-                        Las claves no coincide con el formato solicitado.
-                    </div>
-                ';
-                exit();
-            }
-        if($clave_1!=$clave_2){
-            echo'
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    Las contraseñas que ha ingresado no coinciden.
-                </div>
-            ';
-            exit();
-        }else{
-            $clave=password_hash($clave_1,PASSWORD_BCRYPT,array("cost"=>10));
-        }
-}
-
     // Actualizar datos
-    $actualizar_usuario=conexion();
-    $actualizar_usuario=$actualizar_usuario->prepare("UPDATE usuarios SET correo=:correo,
-    contrasena_hash=:clave,rol=:rol  WHERE
+    $actualizar_materia=conexion();
+    $actualizar_materia=$actualizar_materia->prepare("UPDATE materias SET nombre=:nombre,
+    tipo=:tipo  WHERE
     id=:id");
 
     $marcadores=[
         ":id"=>$id,
-        ":correo"=>$correo,
-        ":clave"=>$clave,
-        ":rol"=>$rol
+        ":nombre"=>$nombre,
+        ":tipo"=>$tipo
     ];
 
-    if($actualizar_usuario->execute($marcadores)){
+    if($actualizar_materia->execute($marcadores)){
         echo'
             <div class="notification is-info is-light">
-                <strong>¡Usuario actualizado!</strong><br>
-                El usuario se ha actualizado con exito.
+                <strong>¡Materia actualizado!</strong><br>
+                La materia se ha actualizado con exito.
             </div>
         ';
     }else{
         echo'
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo actualizar el usuario, por favor intente nuevamente.
+                No se pudo actualizar la materia, por favor intente nuevamente.
             </div>
         ';
     }
-    $actualizar_usuario=null;
+    $actualizar_materia=null;
 ?>

@@ -19,7 +19,7 @@
             include "./inc/btn_back.php";
 
             $check_usuario=conexion();
-            $check_usuario=$check_usuario->query("SELECT * FROM usuario WHERE id='$id'");
+            $check_usuario=$check_usuario->query("SELECT * FROM usuarios WHERE id='$id'");
 
             if($check_usuario->rowCount()>0){
                 $datos=$check_usuario->fetch();
@@ -32,71 +32,67 @@
 		
 		<div class="columns">
             <div class="column is-half">
-                <div class="control">
-                    <label>Correo</label>
-                    <input class="input" type="email" name="email" maxlength="70" required>
+                <label class="label">Correo</label>
+                <input class="input" type="email" name="correo"
+                    value="<?php echo $datos['correo']; ?>" required>
+            </div>
+
+            <div class="column is-half">
+                <label class="label">Rol</label>
+                <div class="select is-fullwidth">
+                    <select name="rol" required>
+                        <option value="admin" <?php if($datos['rol']=="admin") echo "selected"; ?>>Admin</option>
+                        <option value="docente" <?php if($datos['rol']=="docente") echo "selected"; ?>>Docente</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-            <div class="column">
-                <div class="control">
-                    <label>Rol</label>
-                    <div class="select is-fullwidth">
-                        <select name="rol" required>
-                            <option value="">Selecciona un rol</option>
-                            <option value="admin">admin</option>
-                            <option value="docente">docente</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
 		<br><br>
-		<p class="has-text-centered">
-			SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.
-		</p>
-		<br>
-		<div class="columns">
-            <div class="column">
-                <div class="control">
-                    <label>Contraseña</label>
-                    <input class="input" type="password" name="clave_1"
-                    pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
-                </div>
+        <hr>
+
+        <p class="has-text-centered mb-4">
+            Si desea actualizar la clave de este usuario, llene ambos campos.
+            Si no, déjelos vacíos.
+        </p>
+
+        <div class="columns is-centered">
+            <div class="column is-4">
+                <label class="label">Nueva contraseña</label>
+                <input class="input" type="password" name="clave_1">
             </div>
 
-            <div class="column">
-                <div class="control">
-                    <label>Repetir contraseña</label>
-                    <input class="input" type="password" name="clave_2"
-                    pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
-                </div>
+            <div class="column is-4">
+                <label class="label">Repetir contraseña</label>
+                <input class="input" type="password" name="clave_2">
             </div>
+        </div>
+
 		<br><br><br>
-		<p class="has-text-centered">
-			Para poder actualizar los datos de este usuario por favor ingrese su CORREO y CONTRASEÑA
-             con la que ha iniciado sesións
-		</p>
-		<div class="field">
-            <label class="label">Correo</label>
-            <div class="control">
-                <input class="input" type="email" name="administrador_correo" 
-                maxlength="255" required>
-            </div>
-        </div>
+        <hr>
 
-        <div class="field">
-            <label class="label">Contraseña</label>
-            <div class="control">
-                <input class="input" type="password" name="administrador_clave" 
-                pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
-            </div>
-        </div>
-		</div>
-		<p class="has-text-centered">
-			<button type="submit" class="button is-success is-rounded">Actualizar</button>
-		</p>
+<p class="has-text-centered mb-4">
+    Para confirmar los cambios, ingrese su correo y contraseña
+    con los que ha iniciado sesión.
+</p>
+
+<div class="columns is-centered">
+    <div class="column is-4">
+        <label class="label">Correo</label>
+        <input class="input" type="email" name="administrador_correo" required>
+    </div>
+
+    <div class="column is-4">
+        <label class="label">Contraseña</label>
+        <input class="input" type="password" name="administrador_clave" required>
+    </div>
+</div>
+<div class="has-text-centered mt-5">
+    <button class="button is-success is-rounded">
+        Actualizar
+    </button>
+</div>
+
 	</form>
         <?php 
             }else{

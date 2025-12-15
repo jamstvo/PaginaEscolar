@@ -13,7 +13,7 @@
             <div class="column is-half">
                 <div class="control">
                     <label>Correo</label>
-                    <input class="input" type="email" name="email" maxlength="70" required>
+                    <input class="input" type="email" name="correo" maxlength="70" required>
                 </div>
             </div>
         </div>
@@ -40,13 +40,14 @@
                     pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
                 </div>
             </div>
+        </div>
 
             <div class="column">
                 <div class="control">
                     <label>Repetir contraseña</label>
                     <input class="input" type="password" name="clave_2"
                     pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
-                </div>
+                
             </div>
         </div>
 

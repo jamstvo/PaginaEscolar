@@ -7,9 +7,9 @@
 
     $condicion_status = "";
     if($status_filter == "ACTIVO"){
-        $condicion_status = "AND status='ACTIVO'";
+        $condicion_status = "AND docentes.status='ACTIVO'";
     }elseif($status_filter == "INACTIVO"){
-        $condicion_status = "AND status='INACTIVO'";
+        $condicion_status = "AND docentes.status='INACTIVO'";
     }else{
         $condicion_status = ""; // TODOS
     }
@@ -19,8 +19,8 @@
         $consulta_datos = "
         SELECT docentes.*, usuarios.correo 
         FROM docentes
-        INNER JOIN usuarios ON docentes.usuario_id = usuario.id
-        WHERE docentes.id!='".$_SESSION['id']."' 
+        INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
+        WHERE docentes.usuario_id!='".$_SESSION['id']."' 
         AND (docentes.nombre LIKE '%$busqueda%' 
         OR docentes.apellido LIKE '%$busqueda%' 
         OR docentes.telefono LIKE '%$busqueda%'
@@ -31,10 +31,10 @@
         LIMIT $inicio, $registros";
 
         $consulta_total = "
-        SELECT COUNT(docente.id) 
+        SELECT COUNT(docentes.id) 
         FROM docentes
         INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
-        WHERE docentes.id!='".$_SESSION['id']."'
+        WHERE docentes.usuario_id!='".$_SESSION['id']."'
         AND (docentes.nombre LIKE '%$busqueda%'
         OR docentes.apellido LIKE '%$busqueda%'
         OR docentes.telefono LIKE '%$busqueda%'
@@ -47,7 +47,7 @@
         SELECT docentes.*, usuarios.correo 
         FROM docentes
         INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
-        WHERE docentes.id!='".$_SESSION['id']."'
+        WHERE docentes.usuario_id!='".$_SESSION['id']."'
         $condicion_status
         ORDER BY docentes.nombre ASC
         LIMIT $inicio, $registros";
@@ -56,7 +56,7 @@
         SELECT COUNT(docentes.id)
         FROM docentes
         INNER JOIN usuarios ON docentes.usuario_id = usuarios.id
-        WHERE docentes.id!='".$_SESSION['id']."'
+        WHERE docentes.usuario_id!='".$_SESSION['id']."'
         $condicion_status";
 
     }
@@ -106,7 +106,7 @@
                         class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="./php/docente_status.php?id='.$rows['id'].'" 
+                        <a href="index.php?vista=teacher_list&id='.$rows['id'].'&page='.$pagina.'&status_filter='.$status_filter.'"
                         class="button '.($rows['status']=="ACTIVO" ? "is-danger" : "is-warning").' is-rounded is-small">
                         '.($rows['status']=="ACTIVO" ? "Desactivar" : "Activar").'
                         </a>

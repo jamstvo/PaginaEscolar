@@ -1,3 +1,7 @@
+<?php
+    require_once "./php/main.php";
+?>
+
 <div class="container is-fluid mb-6">
     <h1 class="title">Docentes</h1>
     <h2 class="subtitle">Nuevo docente</h2>
@@ -15,9 +19,10 @@
                     <label>Usuario</label>
                     <div class="select is-fullwidth">
                     <select name="usuario_id" required>
+                    <option value="">Seleccione un usuario</option>
                         <?php
                         $conexion = conexion();
-                        $usuarios = $conexion->query("SELECT id, correo FROM usuario WHERE status='ACTIVO' ORDER BY correo ASC");
+                        $usuarios = $conexion->query("SELECT id, correo FROM usuarios WHERE status='ACTIVO' ORDER BY correo ASC");
                         $usuarios = $usuarios->fetchAll();
 
                         foreach($usuarios as $u){

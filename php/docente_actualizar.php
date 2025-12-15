@@ -7,7 +7,7 @@
 
     // Verificar el docente
     $check_docente=conexion();
-    $check_docente=$check_docente->query("SELECT * FROM docente WHERE id='$id'");
+    $check_docente=$check_docente->query("SELECT * FROM docentes WHERE id='$id'");
 
     if($check_docente->rowCount()<=0){
         echo '
@@ -61,13 +61,13 @@
 
     // Verificando admin
     $check_admin=conexion();
-    $check_admin=$check_admin->query("SELECT correo,contraseña_hash FROM usuario WHERE 
+    $check_admin=$check_admin->query("SELECT correo,contrasena_hash FROM usuarios WHERE 
     correo='$admin_correo' AND id='".$_SESSION['id']."'");
     if($check_admin->rowCount()==1){
         $check_admin=$check_admin->fetch();
 
         if($check_admin['correo']!=$admin_correo || !password_verify($admin_clave, $check_admin
-        ['contraseña_hash'])){
+        ['contrasena_hash'])){
             echo '
                 <div class="notification is-danger is-light">
                     <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -120,7 +120,7 @@ if (verificar_datos("[0-9]{1,10}", $usuario_id)) {
 
 // Verificar si usuario_id existe en la tabla usuario
 $check_usuario = conexion();
-$check_usuario = $check_usuario->query("SELECT id FROM usuario WHERE id = '$usuario_id' LIMIT 1");
+$check_usuario = $check_usuario->query("SELECT id FROM usuarios WHERE id = '$usuario_id' LIMIT 1");
 
 if ($check_usuario->rowCount() <= 0) {
     echo '
@@ -135,7 +135,7 @@ $check_usuario = null;
 
 // Verificar si este usuario ya tiene un docente asignado
 $check_docente = conexion();
-$check_docente = $check_docente->query("SELECT usuario_id FROM docente WHERE usuario_id = '$usuario_id' LIMIT 1");
+$check_docente = $check_docente->query("SELECT usuario_id FROM docentes WHERE usuario_id = '$usuario_id' LIMIT 1");
 
 if ($check_docente->rowCount() > 0) {
     echo '
@@ -192,7 +192,7 @@ if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}", $especialidad)) 
 
     // Actualizar datos
     $actualizar_docente=conexion();
-    $actualizar_docente=$actualizar_docente->prepare("UPDATE docente SET usuario_id=:usuario_id,
+    $actualizar_docente=$actualizar_docente->prepare("UPDATE docentes SET usuario_id=:usuario_id,
     nombre=:nombre,apellido=:apellido,telefono=:telefono,especialidad=:especialidad WHERE
     id=:id");
 

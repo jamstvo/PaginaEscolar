@@ -9,7 +9,7 @@ $telefono     = limpiar_cadena($_POST['telefono']);
 $especialidad = limpiar_cadena($_POST['especialidad']);
 
 // Verificar campos obligatorios
-if ($usuario_id == "" || $nombre == "" || $apellido == "" || $telefono == "" || $especialidad == "") {
+if ($usuario_id == "" || $nombre == "" || $especialidad == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -73,7 +73,7 @@ if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $nombre)) {
     exit();
 }
 
-if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $apellido)) {
+if ($apellido != "" && verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $apellido)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -83,7 +83,7 @@ if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $apellido)) {
     exit();
 }
 
-if (verificar_datos("[0-9()+ -]{7,20}", $telefono)) {
+if ($telefono != "" && verificar_datos("[0-9()+ -]{7,20}", $telefono)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrio un error inesperado!</strong><br>

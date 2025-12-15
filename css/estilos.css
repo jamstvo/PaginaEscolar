@@ -1,24 +1,127 @@
-body, html{
-    height: 100%;
-    width: 100%;
+:root {
+    --wine-dark: #33090A;          /* guinda ultra oscuro */
+    --wine-medium: #4A0E0F;        /* vino profundo */
+    --cream: #E9E4D8;              /* crema antiguo */
+    --charcoal: #0d0c0c;           /* casi negro */
+    --gray-smoke: #3E3C3B;         /* gris humo */
 }
 
-.main-container{
+/* Fondo global */
+body, html {
     height: 100%;
     width: 100%;
+    background-color: var(--wine-dark);
+    color: var(--cream);
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.3px;
+}
+
+/* Navbar */
+.navbar, .navbar-item a {
+    background-color: var(--charcoal) !important;
+    color: var(--cream) !important;
+    border-bottom: 1px solid var(--gray-smoke);
+}
+
+/* Botón principal */
+.button.is-primary {
+    background-color: var(--wine-medium) !important;
+    color: var(--cream) !important;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.button.is-primary:hover {
+    background-color: #5F1516 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenedores */
+.box {
+    background-color: var(--charcoal);
+    border-left: 4px solid var(--wine-medium);
+    color: var(--cream);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Inputs */
+input.input, textarea.textarea, select {
+    background-color: var(--gray-smoke) !important;
+    color: var(--cream) !important;
+    border: 1px solid var(--wine-medium) !important;
+}
+
+input.input::placeholder {
+    color: #C7C2B9;
+}
+
+input.input:focus {
+    border-color: var(--cream) !important;
+    box-shadow: 0 0 0 0.125em rgba(233, 228, 216, 0.2);
+}
+
+/* Links */
+a {
+    color: var(--cream);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--wine-medium);
+    text-decoration: underline;
+}
+
+/* Tablas */
+table th {
+    background-color: var(--charcoal) !important;
+    color: var(--cream) !important;
+}
+
+table tbody tr:hover {
+    background-color: rgba(233, 228, 216, 0.1);
+}
+
+/* Contenedor del login */
+.main-container {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main-container > .login, 
-.main-container > .hero-body{
-    height: auto;
+.main-container > .login,
+.main-container > .hero-body {
+    background-color: var(--charcoal);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 25px;
     width: 100%;
-    max-width: 400px;
-    min-width: 300px;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
-.form-inline{
-    display: inline-flex;
+/* Notificaciones */
+.notification.is-danger {
+    background-color: #4A0E0F20;
+    border-left: 4px solid var(--wine-medium);
+    color: var(--cream);
+}
+
+.notification.is-success {
+    background-color: #1A3A1A20;
+    border-left: 4px solid #2C7F4A;
+    color: var(--cream);
+}
+
+/* Tags */
+.tag.is-primary {
+    background-color: var(--wine-medium);
+    color: var(--cream);
+}
+
+.tag {
+    background-color: var(--gray-smoke);
+    color: var(--cream);
 }

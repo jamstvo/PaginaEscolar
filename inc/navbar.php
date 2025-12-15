@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="index.php?vista=home">
-        <img src="./img/logo.png" width="65" height="100">
+        <img src="./img/DGETI.jpg" width="60" height="100">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -21,25 +21,23 @@
             <a class="navbar-item" href="index.php?vista=teacher_new">Nuevo</a>
             <a class="navbar-item" href="index.php?vista=teacher_list">Lista</a>
             <a class="navbar-item" href="index.php?vista=teacher_search">Buscar</a>
-            <a class="navbar-item" href="index.php?vista=teacher_listN">Inactivos</a>
         </div>
       </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">Grupos</a>
         <div class="navbar-dropdown">
-            <a class="navbar-item" href="index.php?vista=grupo_new">Nuevo</a>
-            <a class="navbar-item" href="index.php?vista=grupo_list">Lista</a>
-            <a class="navbar-item" href="index.php?vista=grupo_search">Buscar</a>
+            <a class="navbar-item" href="index.php?vista=group_new">Nuevo</a>
+            <a class="navbar-item" href="index.php?vista=group_list">Lista</a>
+            <a class="navbar-item" href="index.php?vista=group_search">Buscar</a>
         </div>
       </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">Horarios</a>
         <div class="navbar-dropdown">
-            <a class="navbar-item" href="index.php?vista=horario_new">Nuevo</a>
-            <a class="navbar-item" href="index.php?vista=horario_list">Lista</a>
-            <a class="navbar-item" href="index.php?vista=horario_search">Buscar</a>
+            <a class="navbar-item" href="index.php?vista=schedule_new">Nueva clase</a>
+            <a class="navbar-item" href="index.php?vista=schedule_list">Ver</a>
         </div>
       </div>
 
